@@ -11,11 +11,11 @@ import java.util.Arrays;
 public class QuickSort {
 
     public static void main(String[] args) {
-        int[] arr = new int[]{5, 2, 7, 1, 9};
-        QuickSort.quickSort(arr, 0, arr.length - 1);
-        System.out.println(Arrays.toString(arr));
+//        int[] arr = new int[]{5, 2, 7, 1, 9};
+//        QuickSort.quickSort(arr, 0, arr.length - 1);
+//        System.out.println(Arrays.toString(arr));
         int[] arr2 = new int[]{5, 2, 7, 1, 9};
-        QuickSort.quickSort(arr2, 0, arr2.length - 1);
+        QuickSort.hoareQuickSort(arr2, 0, arr2.length - 1);
         System.out.println(Arrays.toString(arr2));
     }
 
@@ -28,12 +28,12 @@ public class QuickSort {
         }
     }
 
-    public static void quickSort2(int[] arr, int begin, int end) {
+    public static void hoareQuickSort(int[] arr, int begin, int end) {
         if (begin < end) {
             int pivot = arr[(begin + end) / 2];
             int p = hoarePartition(arr, begin, end, pivot);
-            quickSort2(arr, begin, p - 1);
-            quickSort2(arr, p + 1, end);
+            hoareQuickSort(arr, begin, p - 1);
+            hoareQuickSort(arr, p + 1, end);
         }
     }
 
@@ -42,14 +42,14 @@ public class QuickSort {
      */
     private static int hoarePartition(int arr[], int left, int right, int pivot) {
 
-        while (left <= right) {
+        while (left < right) {
             while (arr[left] < pivot) {
                 left++;
             }
             while (arr[right] > pivot) {
-                right++;
+                right--;
             }
-            while (arr[left] > arr[right]) {
+            if (arr[left] > arr[right]) {
                 int temp = arr[right];
                 arr[right] = arr[left];
                 arr[left] = temp;
