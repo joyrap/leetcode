@@ -56,14 +56,32 @@ public class _24 {
         return arr2.get(0);
     }
 
+    /**
+     * 迭代法
+     */
     public static ListNode swapPairs2(ListNode head) {
-        ListNode pre = null;
-        while (head != null) {
-            pre = new ListNode(head.next.val);
-            pre.next = head;
-            head.next = head.next.next;
-            head = head.next;
+        ListNode newHead = new ListNode(-1);//新链表头
+        newHead.next = head;
+        ListNode pre = newHead;
+        ListNode a;
+        ListNode b;
+        while (pre.next != null && pre.next.next != null) {//链表至少有两个元素
+            a = pre.next;
+            b = a.next;
+            
+            pre.next = b;//
+            a.next = b.next;
+            b.next = a;
+            pre = a;
+
         }
-        return pre;
+        return newHead.next;
+    }
+
+    /**
+     * 递归(递归代码简介，但是空间复杂度为n)
+     */
+    public static ListNode swapPairs3(ListNode head) {
+        return null;
     }
 }
